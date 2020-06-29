@@ -3,6 +3,7 @@ load_originals_config.py
 original_dataset/*
 !original_dataset/original_dataset_not_available.md
 !original_dataset/sample_dataset.txt
+processed_dataset/*
 
 # Created by https://www.gitignore.io/api/latex,python,microsoftoffice
 # Edit at https://www.gitignore.io/?templates=latex,python,microsoftoffice
