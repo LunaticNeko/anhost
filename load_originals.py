@@ -63,5 +63,9 @@ for (year, deadline, sections) in config.import_datasets:
         df = df.append(df_sub)
 
 #print(df)
-print(df.to_csv(index=False))
+
+export_path = os.path.join(config.export_dir, config.export_filename)
+with open(export_path, 'w') as export_file:
+    export_file.write(df.to_csv(index=False))
+
 

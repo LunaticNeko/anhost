@@ -1,6 +1,7 @@
 # Analysis of Homework Submission Time (AnHoST)
 
-Designed to work, currently, with WebClass data exports.
+This project takes CSVs of multiple class sections over many years to combine,
+analyze, perform statistics on, and plot homework submissions.
 
 ## Purpose:
 
@@ -20,6 +21,9 @@ Designed to work, currently, with WebClass data exports.
    moment because it was originally designed for a "submit or fail" class.
 2. This work IS designed to work with multiple classes and years. It is designed
    for a long-standing and massive course.
+3. The current preprocessing script works only with WebClass, specifically, the
+   implementation at Kanazawa University. We plan to generalize this as we work
+   with other institutions and LMSes.
 
 ## For researchers:
 
