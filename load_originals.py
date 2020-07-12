@@ -54,6 +54,7 @@ for (year, deadline, sections) in config.original_datasets:
         df_sub["deadline"] = pd.to_datetime(deadline)
         df_sub["year"] = int(year)
         df_sub["sec"] = str(section)
+        df_sub = df_sub.drop_duplicates(subset=[cn["userid"]], keep="first")
         df_sub = df_sub.drop(import_cns, axis=1)
         df_sub = df_sub[export_sec_cns]
         df_year = df_year.append(df_sub)
