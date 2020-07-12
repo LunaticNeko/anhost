@@ -1,9 +1,11 @@
 
 config.py
-dataset/*
 dataset/original/*
 !dataset/original/original_dataset_not_available.md
 !dataset/original/sample_dataset.txt
+
+
+vim-markdown-preview.html
 
 # Created by https://www.gitignore.io/api/latex,python,microsoftoffice
 # Edit at https://www.gitignore.io/?templates=latex,python,microsoftoffice
