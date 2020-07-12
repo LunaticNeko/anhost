@@ -1,6 +1,8 @@
 
 config.py
 dataset/original/*
+dataset/_processed.csv
+dataset/_indexed.csv
 !dataset/original/sample_dataset.txt
 
 

@@ -59,7 +59,7 @@ for (year, deadline, sections) in config.original_datasets:
         df_year = df_year.append(df_sub)
     df = df.append(df_year)
 
-proc_path = os.path.join(config.proc_dir, config.proc_filename)
+proc_path = os.path.join(config.proc_dir, config.proc_dataset)
 with open(proc_path, 'w') as proc_file:
     proc_file.write(df.to_csv(index=False))
 
