@@ -13,8 +13,8 @@ import pandas as pd
 import numpy as np
 
 # We use a configuration script to set it all up. Refer to
-# load_originals_config_template.py for template.
-import load_originals_config as config
+# config_template.py for template.
+import config
 
 # Column name definitions
 
@@ -26,8 +26,7 @@ cn = {
         }
 
 import_cns = [cn["userid"], cn["date"], cn["time"], cn["score"]]
-export_sec_cns = ["year", "sec", "index.year", "index.sec", "timestamp", "deadline"]
-
+export_sec_cns = ["year", "sec", "timestamp", "deadline"]
 
 # Final dataframe to be exported (will contain no user ID and only minimum data
 # necessary for further processing)
@@ -35,8 +34,6 @@ export_sec_cns = ["year", "sec", "index.year", "index.sec", "timestamp", "deadli
 df_dtypes = np.dtype([
     ("year", int),
     ("sec", str),
-    ("index.year", int),
-    ("index.sec", int),
     ("timestamp", np.datetime64),
     ("deadline", np.datetime64),
     ])
@@ -44,28 +41,26 @@ df_dtypes = np.dtype([
 df = pd.DataFrame(np.empty(0, dtype=df_dtypes))
 
 # Actual import
+# TODO: Move indexing to the process_data script. This file is supposed to be
+#       about data sanitization only. No other functions should be implemented.
 
-for (year, deadline, sections) in config.import_datasets:
+for (year, deadline, sections) in config.original_datasets:
+    df_year = pd.DataFrame(np.empty(0, dtype=df_dtypes))
     for (section, filename) in sections:
-        df_sub = pd.read_csv(os.path.join(config.import_dir, filename), usecols=import_cns,
+        df_sub = pd.read_csv(os.path.join(config.original_dir, filename), usecols=import_cns,
                 converters={cn["userid"]: str, cn["date"]: str, cn["time"]: str, cn["score"]: int})
         new_timestamp = pd.to_datetime(df_sub[cn["date"]] + " " + df_sub[cn["time"]])
         df_sub["timestamp"] = pd.to_datetime(df_sub[cn["date"]] + " " + df_sub[cn["time"]])
         df_sub["deadline"] = pd.to_datetime(deadline)
         df_sub["year"] = int(year)
         df_sub["sec"] = str(section)
-        df_sub["index.year"] = 0
-        df_sub = df_sub.sort_values(by="timestamp", ascending="true")
-        df_sub["index.sec"] = np.arange(len(df_sub))+1
-        df_sub = df_sub.drop_duplicates(subset=[cn["userid"]], keep="first")
         df_sub = df_sub.drop(import_cns, axis=1)
         df_sub = df_sub[export_sec_cns]
-        df = df.append(df_sub)
+        df_year = df_year.append(df_sub)
+    df = df.append(df_year)
 
-#print(df)
-
-export_path = os.path.join(config.export_dir, config.export_filename)
-with open(export_path, 'w') as export_file:
-    export_file.write(df.to_csv(index=False))
+proc_path = os.path.join(config.proc_dir, config.proc_filename)
+with open(proc_path, 'w') as proc_file:
+    proc_file.write(df.to_csv(index=False))
 
 
