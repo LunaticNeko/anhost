@@ -40,9 +40,12 @@ This work was created on/for:
 * Python 3.8
 * pandas 1.0.5
 * numpy 1.19.0
+* matplotlib 3.2.2
+* seaborn 0.10.1
 * Windows 10 (this is why I'm trying to stay away from awk/bash/shell stuff)
 
-Python 2 support is not guaranteed.
+Python 2 support is not guaranteed. Other dependencies for the listed packages
+may be required.
 
 ## Copyright:
 
