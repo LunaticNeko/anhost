@@ -10,13 +10,6 @@ import numpy as np
 # Configuration file template is available at config_template.py
 import config
 
-proc_cns = ["year", "sec", "timestamp", "deadline"]
-proc_dtypes = np.dtype([
-    ("year", int),
-    ("sec", str),
-    ("timestamp", np.datetime64),
-    ("deadline", np.datetime64),
-    ])
 proc_converter = {
     "year": int,
     "sec": str,
@@ -24,29 +17,13 @@ proc_converter = {
     "deadline": pd.to_datetime,
     }
 
-def index_data(df):
-    '''
-    Given a data frame, perform indexing on it.
-    '''
-    # if index, index.year, and index.sec are not present, add them.
-    # select each year
-    #   select each sec
-    #       sort by time ascending
-    #     index students in sec
-    #   sort by time ascending
-    #   index students in year
-    # sort by time ascending
-    # index students (globally)
-    pass
+df = pd.read_csv(os.path.join(config.proc_dir, config.proc_dataset),
+                      converters=proc_converter)
 
-# main
+df = df.sort_values(by=["year","timestamp"], ascending="true")
+df['index.sec'] = df.groupby(["year","sec"]).cumcount()
+df['index.year'] = df.groupby("year").cumcount()
 
-proc_df = pd.read_csv(os.path.join(config.proc_dir, config.proc_dataset), converters=proc_converter)
-
-'''
-the following lines HGT'd from load_originals.py
-        df_sub["index.year"] = 0
-        df_sub = df_sub.sort_values(by="timestamp", ascending="true")
-        df_sub["index.sec"] = np.arange(len(df_sub))+1
-        df_sub = df_sub.drop_duplicates(subset=[cn["userid"]], keep="first")
-'''
+indexed_path = os.path.join(config.indexed_dir, config.indexed_dataset)
+with open(indexed_path, 'w') as indexed_file:
+    indexed_file.write(df.to_csv(index=False))
