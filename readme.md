@@ -47,8 +47,13 @@ This work was created on/for:
 Python 2 support is not guaranteed. Other dependencies for the listed packages
 may be required.
 
+## About "SO::"
+
+The main author uses SO::#### as a shorthand to refer to StackOverflow ANSWER
+numbers. Replace SO:#### with https://stackoverflow/a/#### for answer URL.
+
 ## Copyright:
 
 The main author retains copyright in the program. He does NOT own the original
-datasets.
+datasets (not shown in current version). See the LICENSE file for details.
 

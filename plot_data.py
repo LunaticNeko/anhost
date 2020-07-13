@@ -28,12 +28,9 @@ df['timeleft'] = df['timeleft'].clip(lower=pd.Timedelta(0))
 # SO::54535619
 df['timeleft'] = df['timeleft']/pd.to_timedelta(1, unit='D')
 
-#plotdata = df[["year","timeleft","index.year"]]
-
-# SO::14887119
-#fig = sns.FacetGrid(data=df, hue="year")
-fig = sns.scatterplot(data=df, x="timeleft", y="index.year", hue="year", legend="full")
+sns.set()
+fig = sns.scatterplot(data=df, x="timeleft", y="index.year", hue="year", legend="full", palette=sns.color_palette("hls", 2))
 fig.invert_xaxis()
-#fig.set(xlim=(30,0))
+fig.set(xlabel="Days before Deadline", ylabel="Submission Count")
 mpl.pyplot.show()
 
