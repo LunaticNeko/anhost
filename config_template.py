@@ -1,13 +1,13 @@
 # anhost Configuration TEMPLATE
 # Dataset list structure:
 #   (YEAR, DEADLINE, [(section, filename)])
-original_dir = "original_dataset"
+original_dir = "dataset/original"
 original_datasets = [(2020, "2020-05-15 00:00:00",
-                [("section_1", "dataset_2020_section_1.txt"),
-                 ("section_2", "dataset_2020_section_2.txt")]),
-                   (2019, "2019-05-14 18:00:00",
-                [("section_1", "dataset_2019_section_1.txt"),
-                 ("section_2", "dataset_2019_section_2.txt" )])
+                [("section_1", "sample_dataset_2020.txt"),
+                ]),
+                   (2019, "2019-05-17 00:00:00",
+                [("section_1", "sample_dataset_2019.txt"),
+                ])
                 ]
 
 proc_dir = "dataset"

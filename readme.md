@@ -28,7 +28,8 @@ analyze, perform statistics on, and plot homework submissions.
 ## For researchers:
 
 Original sample data is not available due to privacy reasons, but we have made
-a sample table using [generatedata](https://github.com/benkeen/generatedata).
+a sample table using [generatedata](https://github.com/benkeen/generatedata)
+(names) and [random.org](https://random.org) (numbers and date/time).
 
 If you need the original data for RDM or auditing purposes, please contact the
 main author. (Also ensure that you're looking at the MAIN repo, not any fork.)
