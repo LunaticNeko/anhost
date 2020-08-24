@@ -39,7 +39,7 @@ scipy.stats.ttest_ind(timeleft_series[0], timeleft_series[1], equal_var=False)
 sns.set(style="ticks", color_codes=True)
 
 #Plotting the data
-fig = plt.figure() #SO::52361152
+fig = plt.figure(figsize=(6,8)) #SO::52361152
 fig.subplots_adjust(hspace=0.4, wspace=0.4)
 ax = fig.add_subplot(2,1,1)
 sns.scatterplot(data=df, x="timeleft", y="index.year", hue="year", legend="full", palette=sns.color_palette("hls", 2)).invert_xaxis()
